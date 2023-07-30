@@ -1,0 +1,78 @@
+CREATE VIEW VISTA_INGRESO
+AS
+select 
+	t1.ingreso_id,
+	t1.tipo_comprobante,
+	t5.nombre_comprobante AS TipoComprobante,
+	t1.num_comprobante,
+	t1.fecha_recepcion,
+      t1.cantidad, 
+	t1.num_lote,
+	t1.proveedor_id,
+	t2.nombre AS Proveedor,
+	t1.producto_id,
+	t3.nombre AS Producto,
+    t1.usuario_id,
+	CONCAT(t4.nombre,' ', t4.apellido_paterno,' ', t4.apellido_materno) AS Usuario
+	
+from 
+	dbo.ingreso t1 inner join proveedor t2
+		ON t1.proveedor_id = t2.proveedor_id
+	INNER JOIN producto t3
+		ON t1.producto_id = t3.producto_id
+	INNER JOIN usuario t4 
+		ON t1.usuario_id = t4.usuario_id
+	INNER JOIN tipoComprobante t5 
+		ON t1.tipo_comprobante = t5.comprobante_id
+
+
+CREATE VIEW VISTA_EGRESO
+AS
+select 
+	t1.salida_id,
+	t1.comprobante_id,
+	t5.nombre_comprobante AS TipoComprobante,
+	t1.num_comprobante,
+	t1.fecha_salida,
+    t1.cantidad, 
+	t1.cliente_id,
+	t2.razonsocial AS Cliente,
+	t1.producto_id,
+	t3.nombre AS Producto,
+    t1.usuario_id,
+	CONCAT(t4.nombre,' ', t4.apellido_paterno,' ', t4.apellido_materno) AS Usuario
+	
+from 
+		dbo.egreso t1 inner join cliente t2
+		ON t1.cliente_id = t2.cliente_id
+	INNER JOIN producto t3
+		ON t1.producto_id = t3.producto_id
+	INNER JOIN usuario t4 
+		ON t1.usuario_id = t4.usuario_id
+	INNER JOIN tipoComprobante t5 
+		ON t1.comprobante_id = t5.comprobante_id
+
+CREATE VIEW VISTA_CLIENTE
+AS
+select 
+	t1.cliente_id,
+	t1.codigocliente,
+	t1.razonsocial,
+	t1.documento_id,
+	t2.codigo_documento AS tipoDocumento,
+	t1.numerodocumento,
+    t1.direccion, 
+	t1.telefono,
+	t1.email
+		
+from 
+		dbo.cliente t1 inner join tipoDocumento t2
+		ON t1.documento_id = t2.documento_id
+
+
+
+PAGINA PARA COMPROBAR DIFERENCIAS
+win merge.org
+
+
+

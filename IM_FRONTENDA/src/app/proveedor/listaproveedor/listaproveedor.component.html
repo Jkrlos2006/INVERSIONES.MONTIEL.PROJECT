@@ -1,0 +1,148 @@
+<div class="mt-5">
+    <h1 class="color-titulo">MANTENIMIENTO DE PROVEEDORES</h1>
+</div>
+<!-- XD -->
+<div class="card-body">
+    <form [formGroup]="myFormFiltro">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">CORREO ELECTRONICO</label>
+                    <input formControlName="Email" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">Nombre</label>
+                    <input formControlName="Nombre" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <button (click)="buscarFiltro()" class="float-end btn btn-sm btn-primary "> Buscar </button>
+                <button (click)="LimpiarFiltro()" class="float-end btn btn-sm btn-danger "> Limpiar </button>
+                <button (click)="exportarLista()" class="float-end btn btn-sm btn-success "> Exportar </button>
+            </div>
+        </div>
+    </form>
+
+</div>
+<!-- XD -->
+
+<div *ngIf="accion == 'lista'">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th class="color-titulo">ID PROVEEDOR</th>
+                <th class="color-titulo">Nombre</th>
+                <th class="color-titulo">Tipo de Documento</th>
+                <th class="color-titulo">Numero de Documento</th>
+                <th class="color-titulo">Direccion</th>
+                <th class="color-titulo">Telefono</th>
+                <th class="color-titulo">Email</th>
+                <th>
+                    <button (click)="btnCrear()" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Nuevo Proveedor
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let j of proveedors">
+                <td> {{j.proveedorId}} </td>
+                <td> {{j.nombre}} </td>
+                <td> {{j.tipoDocumento1}} </td>
+                <td> {{j.numeroDocumento}} </td>
+                <td> {{j.direccion}} </td>
+                <td> {{j.telefono}} </td>
+                <td> {{j.email}} </td>
+                <td>
+
+                                   
+                    <button (click)="btnEditar(j)" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button (click)="eliminar(j)" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination [totalItems]="totalRegistro" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+    [itemsPerPage]="filtroRequest.cantidad">
+    </pagination>
+</div>
+
+
+<div *ngIf="accion == 'registro'">
+    <div class="container">
+        <div class="card text-dark bg-light mb-3">
+            <!-- <div class="card-header"></div> -->
+            <div class="card-body">
+                <form [formGroup]="myForm">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">ID</label>
+                                <input type="text" class="form-control" formControlName="proveedorId">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Nombre</label>
+                                <input type="text" class="form-control" formControlName="nombre">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="formgroup">
+                              <label for="">Tipo de Documento</label>
+                              <select class= "form-select" formControlName="tipoDocumento">
+                                <option *ngFor="let d of tipodocumentos" [value]="d.documentoId">{{d.codigoDocumento}}</option>
+                              </select>             
+                              
+                            </div>
+                          </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Numero de Documento</label>
+                                <input type="text" class="form-control" formControlName="numeroDocumento">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Direccion</label>
+                                <input type="text" class="form-control" formControlName="direccion">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Telefono</label>
+                                <input type="text" class="form-control" formControlName="telefono">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Email</label>
+                                <input type="text" class="form-control" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button (click)="btnGuardar()" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-save"> Guardar</i>
+                                </button>
+                                <button (click)="despuesDeGuardar()" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-ban"> Cancelar</i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

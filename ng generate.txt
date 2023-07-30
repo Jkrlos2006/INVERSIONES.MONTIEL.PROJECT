@@ -1,0 +1,6 @@
+ng generate component salida-producto/lista-salida-producto
+ng generate component salida-producto/registro-salida-producto
+
+ng generate service service/salida-producto
+
+ng generate class models/salida-producto

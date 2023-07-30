@@ -1,0 +1,145 @@
+<div class="mt-5">
+    <h1 class="color-titulo">MANTENIMIENTO DE PRODUCTOS</h1>
+
+</div>
+<div class="card-body">
+    <form [formGroup]="myFormFiltro">
+        <div class="row">
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">CATEGORIA</label>
+                    <input formControlName="Categoria" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="form-group">
+                    <label for="">NOMBRE</label>
+                    <input formControlName="Nombre" type="text" class="form-control">
+                </div>
+            </div>
+            <div class="col-12">
+                <button (click)="buscarFiltro()" class="float-end btn btn-sm btn-primary "> Buscar </button>
+                <button (click)="LimpiarFiltro()" class="float-end btn btn-sm btn-danger "> Limpiar </button>
+                <button (click)="exportarLista()" class="float-end btn btn-sm btn-success "> Exportar </button>
+            </div>
+        </div>
+    </form>
+
+
+<div *ngIf="accion == 'lista'">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <!-- <th style="color: rgb(15, 114, 60);">ID</th> -->
+                <th class="color-titulo">Categoria</th>
+                <th class="color-titulo">Nombre</th>
+                <th class="color-titulo">Descripcion</th>
+                <th class="color-titulo">Stock</th>
+                <th class="color-titulo">Costo Sin IGV</th>
+                <th class="color-titulo">Costo Con IGV</th>
+                <th>
+                    <button (click)="btnCrear()" class="btn btn-success btn-sm">
+                        <i class="fas fa-plus"></i> Nuevo Producto
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of productos">
+                <!-- <td> {{x.productoId}} </td> -->
+                <td> {{x.categoria}} </td>
+                <td> {{x.nombre}} </td>
+                <td> {{x.descripcion}} </td>
+                <td> {{x.stock}} </td>
+                <td> {{x.costoSinIgv}} </td>
+                <td> {{x.costoConIgv}} </td>
+                <td>
+                    <button (click)="btnEditar(x)" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-edit"></i> Editar
+                    </button>
+                    <button (click)="eliminar(x)" class="btn btn-outline-success btn-sm">
+                        <i class="fas fa-trash"></i> Eliminar
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <pagination [totalItems]="totalRegistro" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+    [itemsPerPage]="filtroRequest.cantidad">
+
+</pagination>
+ </div>
+
+
+<div *ngIf="accion == 'registro'">
+    <div class="container">
+        <div class="card text-dark bg-light mb-3">
+            <!-- <div class="card-header"></div> -->
+            <div class="card-body">
+                <form [formGroup]="myForm">
+                    <div class="row">
+                        <!-- <div class="col-12">
+                            <div class="form-group">
+                                <label for="">ID</label>
+                                <input type="text" class="form-control" formControlName="productoId">
+                            </div>
+                        </div> -->
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Categoria</label>
+                                <input type="text" class="form-control" formControlName="categoria">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Nombre</label>
+                                <input type="text" class="form-control" formControlName="nombre">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Descripcion del Producto</label>
+                                <textarea class="form-control" placeholder="Ingrese la descripcion del producto" class="form-control" 
+                                formControlName="descripcion" style="height: 100px">
+                            </textarea>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Stock</label>
+                                <input type="number" class="form-control" formControlName="stock">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Costo Sin IGV</label>
+                                <input type="number" class="form-control" formControlName="costoSinIgv">
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group">
+                                <label for="">Costo Con IGV</label>
+                                <input type="number" class="form-control" formControlName="costoConIgv">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-group">
+                                <button (click)="btnGuardar()" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-save"> Guardar</i>
+                                </button>
+                                <button (click)="despuesDeGuardar()" class="btn btn-outline-success btn-sm">
+                                    <i class="fas fa-ban"> Cancelar</i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+

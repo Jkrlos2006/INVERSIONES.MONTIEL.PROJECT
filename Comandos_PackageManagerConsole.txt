@@ -1,0 +1,118 @@
+1) identificar nuestra cadena de conexión
+Data Source=localhost;Initial Catalog=TercerCiclo;Integrated Security=True
+
+
+Comando de entity framework para mapear todas las tablas de la base de datos
+
+
+-OutputDir ==> la carpeta donde se va a crear todas las clases mapeadas (tablas)
+-DataAnnotations ==> anotaciones de nuestras clases en relación a la base de datos
+-Context ==> va a ser nuestro archivo de configuración para poder intercambiar datos con nuestra base de datos
+-Force ==> sobre escribir todas las clases que se hayan creado
+
+
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=TercerCiclo;Integrated Security=True; TrustServerCertificate=True"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir DBTercerCiclo -DataAnnotations -Context "_DbContextTercerCiclo" -Force
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=InversionesMontiel;Integrated Security=True; TrustServerCertificate=True"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir DBInversionesMontiel -DataAnnotations -Context "_DbContextInversionesMontiel" -Force
+
+
+
+
+CONFIGURACIÓN POSTMAN
+
+	VARIABLES DE ENTORNO
+		URL BASE ==> https://localhost:7012/api/ || {{url}}
+
+
+	EL TRABAJO EN EQUIPO
+
+
+
+BASE DE NUESTRO SISTEMA 
+	(A NIVEL DE ADMINISTRATIVA)
+SISTEMA DE VENTAS
+	01 DIAGRAMA DE BASE DE DATOS
+	02 ARQUITECTURA DE BACK END ()
+	03 BUENAS PRACTICAS DE DESARROLLO DE SOFTAWRE
+	04 END POINTS 
+	06 ARQUITECTURA DE APP
+	05 SEGURIDAD
+	07 DTO's ==> AUTOMAPPERS
+	08 PROCESO DE LOGIN
+	09 OPTIMIZACIÓN DE CÓDIGO	
+--------------------------------------------------------------------
+--------------------------------------------------------------------
+FRONT END
+	01 PLANTILLA BASE
+	02 EXPLICACIÓN DEL FUNCIONAMIENTO DE ANGULAR
+	03 SEGURIDAD 
+	04 SERVICIOS ==> CONSUMIR LOS WEB APIS
+	05 GUARDIANES ==> QUE USUARIOS TIENE ACCESOS A QUE OPCIONES 	
+	06 PROCESO LOGIN ==> 
+	04 PANTALLAS DE ADMINISTRACIÓN CRUD ()
+		CARRITO DE PAGO ==> INTEGRACIÓN CON NUESTRA PASARELA PAGOS
+			Mercado Pago / safetypay 
+
+MVC 	==> 3 CAPAS
+	MODELO 
+		==> Mapea de nuestras tablas
+			Modelos o clases que usamos para el retorno de respuestas
+	CONTROLADOR
+		==> lógica de negocios
+	
+	VISTA 
+		==> HTML / XML / JSON / END POINTS
+
+
+ARQUITECTURA DE N CAPAS
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

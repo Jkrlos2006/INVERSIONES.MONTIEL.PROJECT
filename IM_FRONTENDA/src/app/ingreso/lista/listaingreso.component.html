@@ -1,0 +1,175 @@
+<div class="mt-5">
+  <h1 class="color-titulo">INGRESO DE PRODUCTOS</h1>
+</div>
+
+<div class="card-body">
+  <form [formGroup]="myFormFiltro">
+      <div class="row">
+          <div class="col-6">
+              <div class="form-group">
+                  <label for="">NOMBRE</label>
+                  <input formControlName="NumComprobante" type="text" class="form-control">
+              </div>
+          </div>
+          <div class="col-6">
+              <div class="form-group">
+                  <label for="">NUMERO DE DOCUMENTO</label>
+                  <input formControlName="TipoComprobante1" type="text" class="form-control">
+              </div>
+          </div>
+          <div class="col-12">
+              <button (click)="buscarFiltro()" class="float-end btn btn-sm btn-primary "> Buscar </button>
+              <button (click)="LimpiarFiltro()" class="float-end btn btn-sm btn-danger "> Limpiar </button>
+              <button (click)="exportarLista()" class="float-end btn btn-sm btn-success "> Exportar </button>
+          </div>
+      </div>
+
+<div *ngIf="accion == 'lista'">
+  <table class="table table-bordered">
+      <thead>
+          <tr>
+          <!-- <th style="color: rgb(15, 114, 60);">ID</th> -->
+          <th class="color-titulo">TIPO COMPROBANTE</th>
+          <th class="color-titulo">NUMERO COMPROBANTE</th>
+          <th class="color-titulo">FECHA RECEPCION</th>
+          <th class="color-titulo">CANTIDAD KG</th>
+          <th class="color-titulo">NUM LOTE</th>
+          <th class="color-titulo">PROVEEDOR</th>
+          <th class="color-titulo">PRODUCTO</th>
+          <th class="color-titulo">USUARIO</th>
+          
+          <th>
+          <button (click)="btnCrear()" class="btn btn-success btn-sm">
+          <i class="fas fa-plus"></i> Nuevo Ingreso
+          </button>
+          </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let x of ingresos">
+                <!-- <td> {{x.ingresoId}} </td> -->
+                <td> {{x.tipoComprobante1}} </td>
+                <td> {{x.numComprobante}} </td>
+                <td> {{x.fechaRecepcion | date:'dd/MM/yyyy'}} </td>
+                <td> {{x.cantidad}} </td>
+                <td> {{x.numLote}} </td>
+                <td> {{x.proveedor}} </td>
+                <td> {{x.producto}} </td>
+                <td> {{x.usuario}} </td>
+                <td>
+                  <button (click)="btnEditar(x)" class="btn btn-outline-success btn-sm">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+                <button (click)="eliminar(x)" class="btn btn-outline-success btn-sm">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+          </td>
+        </tr>
+        </tbody>
+     </table>
+
+     <pagination [totalItems]="totalRegistro" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)"
+     [itemsPerPage]="filtroRequest.cantidad">
+
+ </pagination>
+</div>
+
+<div *ngIf="accion == 'registro' ">
+
+  <div class="container">
+    <div class="card text-dark bg-light mb-3">
+        <!-- <div class="card-header"></div> -->
+        <div class="card-body">
+      <form [formGroup]="myForm" >
+        <div class="row">
+<!--           <div class="col-6">
+            <div class="formgroup">
+                <label for="">ID Ingreso</label>
+                <input type="text" class="form-control" formControlName="ingresoId">
+              </div>
+            </div> -->
+            
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Tipo Comprobante</label>
+                <select class= "form-select" formControlName="tipoComprobante">
+                  <option *ngFor="let d of tipocomprobantes" [value]="d.comprobanteId">{{d.nombreComprobante}}</option>
+                </select>             
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Numero Comprobante</label>
+                <input type="text" class="form-control" formControlName="numComprobante">
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">fecha Recepcion</label>
+                <!-- <input type="date" class="form-control" formControlName="fechaRecepcion"> -->
+                <input 
+                  formControlName="fechaRecepcion"
+                  type="text" class="form-control" bsDatepicker 
+                  [(ngModel)]="bsValue" [bsConfig]="{
+                  isAnimated: true,
+                  adaptivePosition: true,
+                  dateInputFormat: 'DD/MM/YYYY'
+                  }"  />
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Cantidad en KG</label>
+                <input type="text" class="form-control" formControlName="cantidad">
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Numero de Lote</label>
+                <input type="text" class="form-control" formControlName="numLote">
+              </div>
+            </div>
+            
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Proveedor</label>
+                <select class= "form-select" formControlName="proveedorId">
+                  <option *ngFor="let d of proveedores" [value]="d.proveedorId">{{d.nombre}}</option>
+                </select>             
+                
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="formgroup">
+                <label for="">Producto</label>
+                <select class= "form-select" formControlName="productoId">
+                  <option *ngFor="let d of productos" [value]="d.productoId">{{d.nombre}}</option>
+                </select>  
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="formgroup">
+                <label for=""> Usuario</label>
+                <select class= "form-select" formControlName="usuarioId">
+                  <option *ngFor="let d of usuarios" [value]="d.usuarioId">{{d.nombre}}</option>
+                </select>  
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="form-group">
+                  <button (click)="btnGuardar()" class="btn btn-outline-success btn-sm">
+                      <i class="fas fa-save"> Guardar</i>
+                  </button>
+                  <button (click)="despuesDeGuardar()" class="btn btn-outline-success btn-sm">
+                      <i class="fas fa-ban"> Cancelar</i>
+                  </button>
+              </div>
+          </div>
+          </div>
+      </form>
+      </div>
+      </div>
+    </div>
+  </div>

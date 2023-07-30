@@ -1,0 +1,16 @@
+﻿1) identificar nuestra cadena de conexión
+Data Source=localhost;Initial Catalog=TercerCiclo;Integrated Security=True
+
+
+Comando de entity framework para mapear todas las tablas de la base de datos
+
+
+-OutputDir ==> la carpeta donde se va a crear todas las clases mapeadas (tablas)
+-DataAnnotations ==> anotaciones de nuestras clases en relación a la base de datos
+-Context ==> va a ser nuestro archivo de configuración para poder intercambiar datos con nuestra base de datos
+-Force ==> sobre escribir todas las clases que se hayan creado
+
+Scaffold-DbContext "Data Source=localhost;Initial Catalog=InversionesMontiel;Integrated Security=True; TrustServerCertificate=True"  Microsoft.EntityFrameworkCore.SqlServer -OutputDir DBInversionesMontiel -DataAnnotations -Context "_DbContextInversionesMontiel" -Force
+
+
+

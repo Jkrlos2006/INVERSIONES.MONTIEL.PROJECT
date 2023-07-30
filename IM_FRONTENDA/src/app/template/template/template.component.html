@@ -1,0 +1,40 @@
+
+<app-header></app-header>
+<div id="layoutSidenav">
+    <app-sidebar></app-sidebar>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <router-outlet></router-outlet>
+
+                
+            </div>
+        </main>
+        <app-footer></app-footer>
+    </div>
+</div>
+
+<!--
+    BACK END 
+    try catch ==> forma primitiva
+        interceptors  ==> forma avanzada o forma correcta
+
+    FRONT END
+
+    errores logicos ==> 50/0 ==> try catch 
+
+    llamar a nuestro end point 
+        ==> http.get("local...../producto").subscribe(
+            (success)=> {},
+            (error) => {
+
+            },
+            ()=> {
+                complete
+            }
+
+        )
+
+
+
+ -->
